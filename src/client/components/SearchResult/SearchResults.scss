@@ -1,0 +1,16 @@
+@import '../../sass/mixins';
+@import '../../sass/variables';
+@import '../../sass/animations';
+
+.results {
+  @include flex-justify(row, space-around);
+  min-height: 50vh;
+  padding: 2rem;
+  opacity: 0;
+  z-index: 0;
+}
+
+.not-hidden {
+  @include animationOptions(opacity, 2s);
+  opacity: 1;
+}

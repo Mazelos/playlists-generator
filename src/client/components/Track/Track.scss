@@ -1,0 +1,43 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.song {
+  @include flex-justify(row, space-between);
+  color: $white;
+  border-bottom: 1px solid $white;
+  padding: .5rem 0;
+  margin: .5rem 0;
+  
+  .track-info {
+    width: fit-content;
+    h3 {
+      font-size: 1.1rem;
+      font-family: $font1;
+      font-weight: 100;
+    }
+    p {
+      font-family: $font2;
+      display: inline;
+      font-size: 1rem;
+      font-weight: 100;
+    }
+    span {
+      margin: 0 .5rem;
+    }
+  }
+  .action-button {
+    width: fit-content;
+    @include flex-align(row, center);
+    cursor: pointer;
+    span {
+      font-size: 1.3rem;
+    }
+    span.added{
+      opacity: .2;
+      cursor: default;
+    }
+    span.not-added{
+      opacity: 1;
+    }
+  }
+}

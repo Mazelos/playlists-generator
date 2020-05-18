@@ -1,0 +1,25 @@
+
+%searchBarBefore {
+  transform: translateY(300px);
+}
+
+%searchBarSubmitted {
+  transform: translateY(0px);
+}
+
+%searchResultsOpacity {
+  opacity: 1;
+}
+
+@mixin animationOptions ($type, $sec){
+  transition: $type $sec ease;
+}
+
+%button-pressed {
+  &:hover {
+      background-color:$baseBlue;
+  }
+  &:active {
+    background-color: $darkBlue;
+  }
+}

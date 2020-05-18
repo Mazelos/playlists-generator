@@ -1,0 +1,43 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+@import '../../sass/animations';
+
+.search-bar {
+  @include flex-align(column, center);
+  width: 80vw;
+  height: fit-content;
+  margin: $centerX;
+  padding: 2rem 0;
+  z-index: 1;
+  @extend %searchBarBefore;
+  @include animationOptions(transform, 1s);
+
+  .text {
+    margin: 1rem 0;
+    padding: .5rem 0;
+    width: 80%;
+    text-align: center;
+    font-size: $h3Size;
+    border-radius: $borderRad2;
+    @include animationOptions(width, 1s);
+  }
+  .submit {
+    margin: .5rem 0;
+    flex-grow: 0;
+    padding: .5rem 2rem;
+    border-radius: $borderRad2;
+    background-color: $darkBlue;
+    color: $white;
+    font-size: 1rem;
+    border: none;
+    @extend %button-pressed;
+    cursor: pointer;
+  }
+}
+
+.submitted {
+  @extend %searchBarSubmitted;
+  .text {
+    width: 350px;
+  }
+}

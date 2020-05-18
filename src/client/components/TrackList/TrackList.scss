@@ -1,0 +1,17 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.search-result, .error{
+  flex-grow: 1;
+  @include flex-justify(column, flex-start);
+  padding: 2rem;
+  background-color: $blackTrasp2;
+  border-radius: $borderRad2;
+  margin: 1rem;
+
+  h2 {
+    font-size: 1.7rem;
+    font-family: $font1;
+    color: $white;
+  }
+}

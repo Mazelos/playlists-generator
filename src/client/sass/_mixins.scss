@@ -1,0 +1,14 @@
+@import './variables';
+
+
+@mixin flex-align ($direction, $disposition) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $disposition;
+}
+
+@mixin flex-justify ($direction, $disposition) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $disposition;
+}

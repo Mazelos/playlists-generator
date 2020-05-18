@@ -1,0 +1,41 @@
+// colors :
+$baseBlue: rgb(96,51,224);
+$darkBlue: rgb(31, 4, 105);
+$blackTrasp: rgba(0, 0, 0, 0.297);
+$blackTrasp2: rgba(0, 0, 0, 0.425);
+$white: rgb(255, 255, 255);
+
+// fonts : 
+$font1: 'Poppins';
+$font2: 'Work Sans';
+
+//shadows :
+$bottomShadow: 0px 10px 20px 0px $blackTrasp;
+
+// backgrounds images:
+$background1: linear-gradient( 180deg, 
+  rgb(17, 17, 160) 0%, 
+  rgb(135, 32, 220) 43%,
+  rgba(248, 66, 99, 0.687) 100%
+);
+
+// text-sizes:
+$h1Size: 2rem;
+$h3Size: 1.2rem;
+
+// paddings :
+$paddingSizeForNav: $h1Size/2;
+$navPadding: $paddingSizeForNav 0;
+
+// margins :
+$centerX: 0 auto;
+$centerSpace: 4rem auto;
+
+// borders :
+$debugBorder: 1px solid red;
+$borderRad: 15px;
+$borderRad2: 7px;
+
+// width 
+$maxVw: 100vw;
+$maxVh: 100vh;

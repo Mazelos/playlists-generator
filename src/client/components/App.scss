@@ -1,6 +1,29 @@
-#app {
+@import '../sass/variables';
+@import '../sass/mixins';
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  background: $baseBlue;
+  background-image: $background1;
+  background-size: 100% 200%;
+  background-position: top;
+
+  // fornts 
   h1 {
-    font-size: 2rem;
-    text-align: center; 
+    font-family: $font1;
+  }
+  
+  main {
+    @include flex-justify(column, flex-start);
+    height: $maxVh;
+    padding-top: $h1Size*2;
+    box-sizing: border-box;
+  }
+
+  header {
+    position: fixed;
+    z-index: 1;
+    top: 0;
   }
 }
