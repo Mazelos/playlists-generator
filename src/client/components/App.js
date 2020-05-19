@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   search(term) {
-    fetch(`/search?name=${term}`)
+    fetch(`http://localhost:3000/search?name=${term}`)
       .then(response => {
         return response.json()
       }).then(jsonRes => {
