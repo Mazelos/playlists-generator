@@ -1,5 +1,2 @@
-# Basic full-stack Boilerplate 
-
-
-This is a boilerplate to build a full stack web application using React, Node.js and Express.</br>
-It's configured using Webpack for bundling, Babel for transpiling and Nodemon as Cli tool for running the server in development mode.
+# Jamming 
+It's a React web application that communicating with the Spotify API will allow users to search in their Spotify personal library , create custom playlists and store them to the Spotify account .
