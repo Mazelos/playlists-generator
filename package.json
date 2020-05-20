@@ -1,7 +1,7 @@
 {
   "name": "jamming",
   "version": "1.0.0",
-  "description": "",
+  "description": "Jamming app",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"npm run client\" \"npm run server\"",
@@ -35,10 +35,12 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.0",
+    "querystring": "^0.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "uuidv4": "^6.0.8"

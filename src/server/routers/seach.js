@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const searchResults = require('../data/searchResults');
 
 router.get('/', (req, res, next) => {
