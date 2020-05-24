@@ -30,15 +30,9 @@ app.use('/login', login);
 const auth = require('./routers/auth');
 app.use('/auth', auth);
 
-// importing the router
+// 
 const search = require('./routers/seach');
-// setting a route for it
 app.use('/search', search);
 
-app.get('/', (req, res) => {
-  res.json({
-    logged: 'boo'
-  })
-})
 
 module.exports = app;

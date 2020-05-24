@@ -2,13 +2,13 @@
 @import '../../sass/mixins';
 
 .navbar {
-  @include flex-justify(column, center);
+  @include flex-justify(row, center);
   width: $maxVw;
   padding: $navPadding;
   background-color: $darkBlue;
   box-shadow: $bottomShadow;
 
-  h1 {
+  h1.nav-title {
     font-size: $h1Size;
     margin: $centerX;
     color: $white;

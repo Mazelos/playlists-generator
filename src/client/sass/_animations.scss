@@ -23,3 +23,16 @@
     background-color: $darkBlue;
   }
 }
+
+%navbar-button-pressed {
+  &:hover {
+    border: $white 1px solid;
+    border-radius: $borderRad2;
+  }
+  &:active {
+    background-color: $white;
+    a {
+      color: $darkBlue;
+    }
+  }
+}

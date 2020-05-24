@@ -1,7 +1,5 @@
 const express = require('express');
 const querystring = require('querystring');
-const fetch = require('node-fetch');
-const request = require('request');
 const axios = require('axios');
 
 const router = express.Router();
@@ -36,11 +34,9 @@ router.get('/', (req, res) => {
   }
   axios.post('https://accounts.spotify.com/api/token', querystring.stringify(body), config)
     .then((response) => {
-      res.clearCookie('access_token');
-      res.clearCookie('refresh_token');
       res.cookie('access_token', response.data.access_token);
       res.cookie('refresh_token', response.data.refresh_token);
-      res.redirect('/')
+      res.redirect('http://localhost:8080/')
     })
     .catch((error) => {
       console.log(`🚨ERROR🚨\n» error-code: ${error.response.status}\n» error-message: ${error.response.statusText}\n» ${error.response.headers.date}`);
