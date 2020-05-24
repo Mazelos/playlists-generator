@@ -6,3 +6,30 @@
   @extend %navbar-button;
   @extend %navbar-button-pressed;
 }
+
+.info-container {
+  position: absolute;
+  top: $h1Size * 2;
+  right: 0px;
+  padding: 2rem;
+  background-color: $darkBlue;
+  border-bottom-left-radius: $borderRad;
+  box-shadow: $boxShadow;
+  h3,p,a {
+    color: $white;
+    font-family: $font2;
+    font-weight: 300;
+    margin: 1em 0;
+  }
+  h3 {
+    font-size: 2rem;
+    margin-top: 0;
+  }
+  strong {
+    font-weight: 400;
+  }
+}
+
+.hidden {
+  display: none;
+}
