@@ -1,2 +1,8 @@
 @import '../../sass/variables';
 @import '../../sass/animations';
+@import '../../sass/placeHolders';
+
+.info-button {
+  @extend %navbar-button;
+  @extend %navbar-button-pressed;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import './UserInfo.scss';
 
 export class UserInfo extends Component {
-  
   constructor(props) {
     super(props)
     this.state = {
@@ -10,19 +10,15 @@ export class UserInfo extends Component {
     this.logInfo = this.logInfo.bind(this);
   }
 
-  componentDidMount() {
-    this.logInfo();
-  }
-
   logInfo() { 
-    for (let item in this.props.UserInfo) {
-      console.log(this.props.UserInfo[item])
-    }
+    console.log('user info : \n', this.props.userInfo)
   }
 
   render() {
     return (
-      <h1>Logged in</h1>
+      <div className='info-button'>
+        <a onClick={this.logInfo}>{this.props.userInfo.id}</a>
+      </div>
     )
   }
 }

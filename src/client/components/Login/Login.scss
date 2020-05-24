@@ -1,19 +1,8 @@
 @import '../../sass/variables';
 @import '../../sass/animations';
+@import '../../sass/placeHolders';
 
-.loginButton {
-  position: absolute;
-  right: $loginSize;
-  top: $paddingSizeForNav ;
-  padding: .30rem;
-  cursor: pointer;
+.login-button {
+  @extend %navbar-button;
   @extend %navbar-button-pressed;
-
-  a {
-    color: $white;
-    font-family: $font2;
-    font-weight: 300;
-    font-size: $loginSize;
-    text-decoration: none;
-  }
 }

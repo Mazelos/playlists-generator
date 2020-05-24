@@ -47,13 +47,13 @@ class App extends Component {
 
   checkAuth() {
     if (document.cookie === '') {
-      console.log(`2-- no cookie found!`);
+      console.log(`no cookie found!`);
       this.setState({ userIsLogged: false });
       return;
     }
     const parsedCookies = cookieParser(document.cookie);
-    if (parsedCookies['access_token']) {
-      console.log('2-- user is logged with access_token: ', parsedCookies['access_token']);
+    if (parsedCookies['access_token'] && parsedCookies['access_token'].length > 0) {
+      console.log('user is logged with access_token: ', parsedCookies['access_token']);
       this.setState({
         accessToken: parsedCookies['access_token'],
         userIsLogged: true
@@ -61,7 +61,7 @@ class App extends Component {
         this.getUserInfo(parsedCookies['access_token'])
       })    
     } else {
-      console.log('2-- user is NOT logged');
+      console.log('user is NOT logged');
       this.setState({
         userIsLogged: false
       })
@@ -69,8 +69,18 @@ class App extends Component {
   }
 
   async getUserInfo(access_token) {
-    const userInfo = await getUserInfo(access_token);
-    this.setState({ userInfo: userInfo })
+    try {
+      const userInfo = await getUserInfo(access_token);
+      this.setState({ userInfo: userInfo })
+    } catch {
+      alert('Something went wrong with authentication! 🤷‍♂️')
+      document.cookie = 'access_token=';
+      this.setState({
+        userIsLogged: false,
+        accessToken: ''
+      })
+    }
+    
   }
 
   search(term) {

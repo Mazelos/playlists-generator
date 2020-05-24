@@ -4,7 +4,7 @@ import './Login.scss';
 export class LoginButton extends Component {
   render() {
     return (
-      <div className="loginButton">
+      <div className="login-button">
         <a href="http://localhost:8888/login">Login with Spotify</a>
       </div>
     )
