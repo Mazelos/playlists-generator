@@ -29,7 +29,8 @@ class App extends Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.checkAuth = this.checkAuth.bind(this);
-    this.getUserInfo = this.getUserInfo.bind(this); 
+    this.getUserInfo = this.getUserInfo.bind(this);
+    this.logOut = this.logOut.bind(this); 
   }
   
   componentDidMount() {
@@ -80,7 +81,17 @@ class App extends Component {
         accessToken: ''
       })
     }
-    
+  }
+
+  logOut() {
+    document.cookie = 'access_token=';
+    document.cookie = 'refresh_token=';
+    console.log(document.cookie)
+    this.setState({
+      userInfo: {},
+      userIsLogged: false,
+      accessToken: ''
+    })
   }
 
   search(term) {
@@ -133,7 +144,9 @@ class App extends Component {
     return (
      <div className='container'>
         <header>
-          <NavBar userIsLogged={this.state.userIsLogged} userInfo={this.state.userIsLogged ? this.state.userInfo : {}}/>
+          <NavBar userIsLogged={this.state.userIsLogged} logOutUser={this.logOut}
+            userInfo={this.state.userIsLogged ? this.state.userInfo : {}}
+          />
         </header>
         <main>
           <SearchBar isSubmitted={this.state.transitionActivated} activateTransition={this.activateTransition}

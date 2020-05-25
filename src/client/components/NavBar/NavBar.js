@@ -8,7 +8,9 @@ export class NavBar extends Component{
     return (
       <div className='navbar'>
         <h1 className='nav-title'>Jamming</h1>
-        {this.props.userIsLogged ? <UserInfo userInfo={this.props.userInfo}/> : <LoginButton/>}
+        { this.props.userIsLogged ?
+          <UserInfo userInfo={this.props.userInfo} logOutUser={this.props.logOutUser}/>
+          : <LoginButton /> }
       </div>
     )
   }

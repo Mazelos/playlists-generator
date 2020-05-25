@@ -5,6 +5,7 @@
   right: $loginSize;
   top: $paddingSizeForNav ;
   padding: .30rem;
+  border: $white 0px solid;  // this is just for making the shape of the box-shadow animation 
   cursor: pointer;
   a {
     color: $white;
