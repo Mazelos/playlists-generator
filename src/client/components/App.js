@@ -73,9 +73,10 @@ class App extends Component {
     try {
       const userInfo = await getUserInfo(access_token);
       this.setState({ userInfo: userInfo })
-    } catch {
-      alert('Something went wrong with authentication! 🤷‍♂️')
+    } catch (error) {
+      alert(error.message);
       document.cookie = 'access_token=';
+      document.cookie = 'refresh_token=';
       this.setState({
         userIsLogged: false,
         accessToken: ''

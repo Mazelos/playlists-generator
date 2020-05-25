@@ -9,7 +9,7 @@ const getUserInfo = async (access_token) => {
   if (!jsonInfo.error) {
     return jsonInfo
   } else {
-    throw Error(jsonInfo.error.status)
+    throw Error(`An error occurred with Status code: ${jsonInfo.error.status}\n${jsonInfo.error.message}`)
   }
 }
 
