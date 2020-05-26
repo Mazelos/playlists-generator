@@ -18,7 +18,6 @@ export class UserInfo extends Component {
   }
 
   HandleLogOut() {
-    console.log('fired')
     this.props.logOutUser()
   }
 

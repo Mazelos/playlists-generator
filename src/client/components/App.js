@@ -9,7 +9,7 @@ import { SearchResults } from './SearchResult/SearchResults';
 //importing helper functions :
 import { cookieParser } from '../util/cookieParser';
 import { getUserInfo } from '../util/getUserInfo';
-
+import { search } from '../util/searchSong';
 // defining the app component that will render all other components imported 
 class App extends Component {
   constructor(props) {
@@ -95,23 +95,16 @@ class App extends Component {
     })
   }
 
-  search(term) {
-    for (let key in this.state.cookies) {
-      console.log(`${key} : \n${this.state.cookies[key]}`)
+  async search(term) {
+    const songs = await search(this.state.accessToken, term);
+    if (songs === []) {
+      this.setState({ didFound: false });
+      return
     }
-    fetch(`http://localhost:8888/search?name=${term}`)
-      .then(response => {
-        return response.json()
-      }).then(jsonRes => {
-        this.setState({
-          searchResults: jsonRes.result,
-          didFound: true
-        })
-      }).catch(error => {
-        this.setState({
-          didFound: false
-        })
-      })
+    this.setState({
+      searchResults: songs,
+      didFound: true
+    })
   }
 
   addTrack(track) {

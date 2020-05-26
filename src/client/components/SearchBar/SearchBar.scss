@@ -41,3 +41,7 @@
     width: 350px;
   }
 }
+
+.invalid-submit {
+  @extend %invalidSubmit
+}

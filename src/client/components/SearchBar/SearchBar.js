@@ -5,40 +5,58 @@ export class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.toggleButton = this.toggleButton.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      searchTerm: ''
+      searchTerm: '',
+      inputIsValid: false,
+      invalidSubmit: false
     }
   }
 
+  // this will update the state so 'invalid-submit' animation can be fired 
   toggleButton() {
+    // this will update the state in case of empty submits so 'invalid-submit' animation can be fired.
+    // once the animation finish (1s) the state will be resetted (so can be re-fired again).
+    // quite shitty... I have to refactor it in a better way 
+    if (!this.state.inputIsValid) {
+      this.setState({ invalidSubmit: true }, () => {
+        setTimeout(() => {
+          this.setState({ invalidSubmit: false })
+        },1000)
+      });
+      return
+    }
+    // activate the first time transition, this func will be called each time but takes effect just once 
     this.props.activateTransition();
+    // passing the search term to the parent
     this.props.onSearch(this.state.searchTerm);
+    // reset the state ...
     this.setState({
-      searchTerm: ''
+      searchTerm: '',
+      inputIsValid: false,
+      invalidSubmit: false
     });
   }
-  handleKeyDown(event) {
-    if (event.keyCode === 13) {
-      this.props.activateTransition();
-      this.props.onSearch(this.state.searchTerm);
+
+  // handle the inputs 
+  handleChange(event) {
+    // won't proceed if the user inputs white spaces
+    if (event.target.value[0] !== ' ') {
+      // validate the input (make it submittable) and update the search term in the state
       this.setState({
-        searchTerm: ''
+        searchTerm: event.target.value,
+        inputIsValid: true
       });
     }
-  }
-  handleChange(event) {
-    this.setState({
-      searchTerm: event.target.value
-    });
   }
 
   render() {
     return (
-      <div className={`search-bar ${this.props.isSubmitted === true ? 'submitted' : ''}`}>
-        <input className='text' placeholder='Search a song' type='text' value={this.state.searchTerm}
-          onKeyDown={this.handleKeyDown} onChange={this.handleChange}/> 
+      // this is just to make the css transition at the begin -------------↓
+      <div className={`search-bar ${this.props.isSubmitted === true ? 'submitted' : ''}`}>  
+        <input className={`text ${this.state.invalidSubmit ? 'invalid-submit' : ''}`}  // toogle the animation in css for the invalid submit
+          placeholder='Search a song' type='text' value={this.state.searchTerm}
+          onChange={this.handleChange} /*onKeyDown = { this.handleKeyDown }*/ />
         <button className='submit' onClick={this.toggleButton}>SEARCH</button>
       </div>
     )
