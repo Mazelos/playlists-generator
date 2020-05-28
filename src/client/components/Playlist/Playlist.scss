@@ -1,17 +1,31 @@
 @import '../../sass/variables';
 @import '../../sass/mixins';
+@import '../../sass/placeHolders';
 
 .playlist {
   @include flex-justify(column, flex-start);
   flex-grow: 1;
-  padding: 2rem;
   background-color: $blackTrasp2;
   border-radius: $borderRad2;
   margin: 1rem;
+  padding: 0 1rem;
 
   h2 {
     font-size: 1.7rem;
     font-family: $font1;
     color: $white;
+  }
+}
+
+.playlist {
+  .title {
+    position: fixed;
+    z-index: 3;
+    padding: $h2Size 1rem;
+  }
+  .tracks {
+    @extend %scroll-bar;
+    padding: 0 1rem;
+    margin: ($h2Size*3) 0 2rem 0;
   }
 }

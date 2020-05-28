@@ -4,6 +4,7 @@ const getUserInfo = async (access_token) => {
       'Authorization': `Bearer ${access_token}`
     }
   }
+  console.log('Called \'v1/me\'')
   const userInfo = await fetch(`https://api.spotify.com/v1/me`, option);
   const jsonInfo = await userInfo.json();
   if (!jsonInfo.error) {

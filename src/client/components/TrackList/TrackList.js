@@ -8,12 +8,16 @@ export class TrackList extends Component {
     return (
       this.props.didFound === true ?
         <div className='search-result'>
-          <h2>Results</h2>
-          {this.props.results.map(track => {
-            return <Track
-              key={track.id} track={track}
-              isRemoval={this.props.isRemoval} addTrack={this.props.addTrack}/>
-          })}
+          <div className='title'>
+            <h2>Results</h2>
+          </div>
+          <div className='tracks'>
+            {this.props.results.map(track => {
+              return <Track
+                key={track.id} track={track}
+                isRemoval={this.props.isRemoval} addTrack={this.props.addTrack}/>
+            })}
+          </div>
         </div> :
         <div className='error'>
           <h2>
