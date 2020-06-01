@@ -34,6 +34,7 @@ class App extends Component {
     this.getUserInfo = this.getUserInfo.bind(this);
     this.logOut = this.logOut.bind(this); 
     this.savePlaylist = this.savePlaylist.bind(this);
+    this.resetTracks = this.resetTracks.bind(this); 
   }
   
   componentDidMount() {
@@ -120,6 +121,7 @@ class App extends Component {
     const trackIndex = this.state.searchResults.findIndex(currentTrack => currentTrack.id === track.id);
     this.toggleHasBeenAdded(this.state.searchResults[trackIndex]);
   }
+
   removeTrack(track) {
     this.state.playlistTracks.forEach((currentTrack, index) => {
       if (currentTrack.id === track.id) {
@@ -132,8 +134,16 @@ class App extends Component {
     const trackIndex = this.state.searchResults.findIndex(currentTrack => currentTrack.id === track.id);
     this.toggleHasBeenAdded(this.state.searchResults[trackIndex]);
   }
+
   toggleHasBeenAdded(track) {
     track.hasBeenAdded = !track.hasBeenAdded;
+  }
+
+  resetTracks() {
+    this.state.playlistTracks.forEach(track => {
+      track.hasBeenAdded = false
+    });
+    this.setState({ playlistTracks: [] })
   }
 
   async savePlaylist() {
@@ -142,6 +152,7 @@ class App extends Component {
     });
     try {
       await savePlaylist(this.state.accessToken, this.state.userInfo.id, this.state.playlistName, trackUris);
+      this.resetTracks();
     } catch (error) {
       alert(error.message);
     }
