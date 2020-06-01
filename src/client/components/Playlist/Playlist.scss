@@ -1,28 +1,44 @@
 @import '../../sass/variables';
 @import '../../sass/mixins';
 @import '../../sass/placeHolders';
+@import '../../sass/animations';
 
 .playlist {
   @include flex-justify(column, flex-start);
   flex-grow: 1;
   background-color: $blackTrasp2;
   border-radius: $borderRad2;
+  width: 300px;
   margin: 1rem;
   padding: 0 1rem;
 
-  h2 {
-    font-size: 1.7rem;
-    font-family: $font1;
-    color: $white;
-  }
-}
-
-.playlist {
   .title {
     position: fixed;
     z-index: 3;
+    display: flex;
+    justify-content: space-between;
     padding: $h2Size 1rem;
+
+    h2 {
+      font-size: 1.7rem;
+      font-family: $font1;
+      color: $white;
+      margin-right: 1em;
+    }
+
+    .save-button {
+      background-color: darkorange;
+      border-radius: $borderRad2;
+      padding: .4em;
+      cursor: pointer;
+      a {
+        font-family: $font1;
+        color: $white;
+      }
+      @extend %save-button-pressed;
+    }
   }
+
   .tracks {
     @extend %scroll-bar;
     padding: 0 1rem;

@@ -6,7 +6,7 @@ const router = express.Router();
 const client_id = process.env.CLIENT_ID;
 const redirect_uri = 'http://localhost:8888/auth';
 const stateKey = 'spotify_auth_state';
-const scope = 'user-read-private user-read-email';
+const scope = 'user-read-private user-read-email playlist-read-private playlist-modify-private playlist-modify-public';
 
 router.get('/', (req, res) => {
   const cookie = generateCookie(16, stateKey);

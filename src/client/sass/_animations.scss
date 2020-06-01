@@ -37,6 +37,15 @@
   }
 }
 
+%save-button-pressed {
+  &:hover {
+    background-color: rgb(250, 175, 36);
+  }
+  &:active {
+    background-color: darkorange;
+  }
+}
+
 @keyframes invalidSubmit {
   0% {
     transform: translateX(0);
@@ -57,6 +66,7 @@
     transform: translateX(0);
   }
 }
+
 %invalidSubmit {
   animation: invalidSubmit 1s ease-in-out;
 }

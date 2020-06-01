@@ -9,7 +9,7 @@ export class SearchResults extends Component {
     return (
       <div className={`results ${this.props.isSubmitted === true ? 'not-hidden' : ''}`}>
         <TrackList results={this.props.tracks} isRemoval={false} addTrack={this.props.onAdd} didFound={this.props.didFound}/>
-        <Playlist songsAdded={this.props.playlistTracks} isRemoval={true} removeTrack={this.props.onRemove}/>
+        <Playlist songsAdded={this.props.playlistTracks} isRemoval={true} removeTrack={this.props.onRemove} savePlaylist={this.props.onSavePlaylist}/>
       </div>
     )
   }

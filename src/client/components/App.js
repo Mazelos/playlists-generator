@@ -10,6 +10,8 @@ import { SearchResults } from './SearchResult/SearchResults';
 import { cookieParser } from '../util/cookieParser';
 import { getUserInfo } from '../util/getUserInfo';
 import { search } from '../util/searchSong';
+import { savePlaylist } from '../util/savePlaylist';
+
 // defining the app component that will render all other components imported 
 class App extends Component {
   constructor(props) {
@@ -18,7 +20,7 @@ class App extends Component {
       transitionActivated: false,
       searchResults: [],
       playlistTracks: [],
-      playlistName: '',
+      playlistName: 'test1',
       didFound: false,
       userIsLogged: false,
       userInfo: {},
@@ -31,6 +33,7 @@ class App extends Component {
     this.checkAuth = this.checkAuth.bind(this);
     this.getUserInfo = this.getUserInfo.bind(this);
     this.logOut = this.logOut.bind(this); 
+    this.savePlaylist = this.savePlaylist.bind(this);
   }
   
   componentDidMount() {
@@ -129,9 +132,19 @@ class App extends Component {
     const trackIndex = this.state.searchResults.findIndex(currentTrack => currentTrack.id === track.id);
     this.toggleHasBeenAdded(this.state.searchResults[trackIndex]);
   }
-
   toggleHasBeenAdded(track) {
     track.hasBeenAdded = !track.hasBeenAdded;
+  }
+
+  async savePlaylist() {
+    const trackUris = this.state.playlistTracks.map(track => {
+      return track.uri
+    });
+    try {
+      await savePlaylist(this.state.accessToken, this.state.userInfo.id, this.state.playlistName, trackUris);
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   render() {
@@ -148,7 +161,7 @@ class App extends Component {
           />
           <SearchResults isSubmitted={this.state.transitionActivated} didFound={this.state.didFound}
             tracks={this.state.searchResults} playlistTracks={this.state.playlistTracks} 
-            onAdd={this.addTrack} onRemove={this.removeTrack}
+            onAdd={this.addTrack} onRemove={this.removeTrack} onSavePlaylist={this.savePlaylist}
           />
         </main>
      </div>
