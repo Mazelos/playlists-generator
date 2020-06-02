@@ -26,4 +26,11 @@ body {
     z-index: 1;
     top: 0;
   }
+
+  main.popup-open {
+    opacity: 0.3;
+    * {
+      pointer-events: none;
+    }
+  }
 }

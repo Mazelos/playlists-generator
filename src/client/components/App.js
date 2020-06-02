@@ -11,6 +11,7 @@ import { cookieParser } from '../util/cookieParser';
 import { getUserInfo } from '../util/getUserInfo';
 import { search } from '../util/searchSong';
 import { savePlaylist } from '../util/savePlaylist';
+import { SavePopup } from './SavePopup/SavePopup';
 
 // defining the app component that will render all other components imported 
 class App extends Component {
@@ -20,11 +21,12 @@ class App extends Component {
       transitionActivated: false,
       searchResults: [],
       playlistTracks: [],
-      playlistName: 'test1',
+      playlistName: '',
+      savePlaylistPopup: 'closed',
       didFound: false,
       userIsLogged: false,
       userInfo: {},
-      accessToken: ''
+      accessToken: '',
     }
     this.activateTransition = this.activateTransition.bind(this);
     this.search = this.search.bind(this);
@@ -34,7 +36,9 @@ class App extends Component {
     this.getUserInfo = this.getUserInfo.bind(this);
     this.logOut = this.logOut.bind(this); 
     this.savePlaylist = this.savePlaylist.bind(this);
-    this.resetTracks = this.resetTracks.bind(this); 
+    this.resetTracks = this.resetTracks.bind(this);
+    this.openSavePlaylistPopup = this.openSavePlaylistPopup.bind(this);
+    this.closeSavePlaylistPopup = this.closeSavePlaylistPopup.bind(this);
   }
   
   componentDidMount() {
@@ -91,7 +95,6 @@ class App extends Component {
   logOut() {
     document.cookie = 'access_token=';
     document.cookie = 'refresh_token=';
-    console.log(document.cookie)
     this.setState({
       userInfo: {},
       userIsLogged: false,
@@ -146,13 +149,25 @@ class App extends Component {
     this.setState({ playlistTracks: [] })
   }
 
-  async savePlaylist() {
+  openSavePlaylistPopup() {
+    this.setState({
+      savePlaylistPopup: 'open'
+    })
+  }
+  closeSavePlaylistPopup() {
+    this.setState({
+      savePlaylistPopup: 'closed'
+    })
+  }
+
+  async savePlaylist(playlistName) {
     const trackUris = this.state.playlistTracks.map(track => {
       return track.uri
     });
     try {
-      await savePlaylist(this.state.accessToken, this.state.userInfo.id, this.state.playlistName, trackUris);
+      await savePlaylist(this.state.accessToken, this.state.userInfo.id, playlistName, trackUris);
       this.resetTracks();
+      this.closeSavePlaylistPopup();
     } catch (error) {
       alert(error.message);
     }
@@ -160,22 +175,23 @@ class App extends Component {
 
   render() {
     return (
-     <div className='container'>
-        <header>
-          <NavBar userIsLogged={this.state.userIsLogged} logOutUser={this.logOut}
-            userInfo={this.state.userIsLogged ? this.state.userInfo : {}}
-          />
-        </header>
-        <main>
-          <SearchBar isSubmitted={this.state.transitionActivated} activateTransition={this.activateTransition}
-            onSearch={this.search} 
-          />
-          <SearchResults isSubmitted={this.state.transitionActivated} didFound={this.state.didFound}
-            tracks={this.state.searchResults} playlistTracks={this.state.playlistTracks} 
-            onAdd={this.addTrack} onRemove={this.removeTrack} onSavePlaylist={this.savePlaylist}
-          />
-        </main>
-     </div>
+      <div className='container'>
+          <header>
+            <NavBar userIsLogged={this.state.userIsLogged} logOutUser={this.logOut}
+              userInfo={this.state.userIsLogged ? this.state.userInfo : {}}
+            />
+          </header>
+          <main className={this.state.savePlaylistPopup === 'open' ? 'popup-open' : ''} onClick={ this.state.savePlaylistPopup === 'open' ? this.closeSavePlaylistPopup : ()=>{}}>
+            <SearchBar isSubmitted={this.state.transitionActivated} activateTransition={this.activateTransition}
+              onSearch={this.search} 
+            />
+            <SearchResults isSubmitted={this.state.transitionActivated} didFound={this.state.didFound}
+              tracks={this.state.searchResults} playlistTracks={this.state.playlistTracks} 
+              onAdd={this.addTrack} onRemove={this.removeTrack} onSavePlaylist={this.openSavePlaylistPopup}
+            />
+          </main> 
+          { this.state.savePlaylistPopup === 'open' && <SavePopup savePlaylist={this.savePlaylist}/> }
+      </div>
     )
   }
 }
