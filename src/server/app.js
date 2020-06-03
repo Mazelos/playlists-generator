@@ -2,8 +2,13 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
 
 const app = express();
+
+// storing the client id from the .env file to the process.env global object 
+// if there's no .env file create one with inside -> CLIENT_ID=[your-spotify-client-id]
+dotenv.config();
 
 // option for the cors middleware
 const whitelist = ['http://localhost:8080'];
@@ -29,10 +34,6 @@ app.use('/login', login);
 // authenticate middleware 
 const auth = require('./routers/auth');
 app.use('/auth', auth);
-
-// 
-const search = require('./routers/seach');
-app.use('/search', search);
 
 
 module.exports = app;
