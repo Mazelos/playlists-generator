@@ -49,14 +49,14 @@ export class SearchBar extends Component {
       });
     }
   }
-  //  ${this.props.isSubmitted === true ? 'submitted' : ''}
+
   render() {
     return (
       // this is just to make the css transition at the begin -------------↓
-      <div className={`search-bar submitted`}>  
+      <div className={`search-bar ${this.props.isSubmitted === true ? 'submitted' : ''}`}>  
         <input className={`text ${this.state.invalidSubmit ? 'invalid-submit' : ''}`}  // toogle the animation in css for the invalid submit
           placeholder='Search a song' type='text' value={this.state.searchTerm}
-          onChange={this.handleChange} /*onKeyDown = { this.handleKeyDown }*/ />
+          onChange={this.handleChange} />
         <button className='submit' onClick={this.toggleButton}>SEARCH</button>
       </div>
     )
